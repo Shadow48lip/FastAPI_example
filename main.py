@@ -61,14 +61,14 @@ async def all_users(session: AsyncSession = Depends(get_async_session)) -> list[
     results = await session.scalars(q)
     print(type(results))
     result = [UsersSchema(id=row.id, name=row.name, age=row.age) for row in results]
-    # если имена колонок сопадают, то можно использовать и более простой механизм
+    # если имена колонок совпадают, то можно использовать и более простой механизм
     # result = [row for row in results]
 
     return result
 
 
 @app.get("/hello/{name}", response_model=UsersSchema)
-async def say_hello(name: Annotated[str, Path(max_length=20)], session: AsyncSession = Depends(get_async_session)):
+async def say_hello(name: Annotated[str, Path(max_length=20, description="имя пользователя")], session: AsyncSession = Depends(get_async_session)):
 
     q = select(User).where(User.name == name)
 

@@ -2,6 +2,7 @@ from enum import Enum
 from typing import Annotated
 
 from fastapi import APIRouter, Query
+from fastapi.responses import PlainTextResponse
 
 router = APIRouter(prefix="/pages", tags=["Example router"])
 
@@ -37,3 +38,10 @@ async def read_items(q: Annotated[str | None, Query(max_length=50)] = None):
     if q:
         results.update({"q": q})
     return results
+
+
+# Возврат text/plain вместо json.
+# В декораторе объявлен класс для документации. В функции для валидации ответа.
+@router.get("/string", response_class=PlainTextResponse)
+async def return_to_string() -> PlainTextResponse:
+    return PlainTextResponse("Hello World")
