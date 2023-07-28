@@ -4,6 +4,8 @@ from typing import Annotated
 from fastapi import APIRouter, Query
 from fastapi.responses import PlainTextResponse
 
+from src.schemas.items import ItemSchema
+
 router = APIRouter(prefix="/pages", tags=["Example router"])
 
 
@@ -45,3 +47,8 @@ async def read_items(q: Annotated[str | None, Query(max_length=50)] = None):
 @router.get("/string", response_class=PlainTextResponse)
 async def return_to_string() -> PlainTextResponse:
     return PlainTextResponse("Hello World")
+
+
+@router.post("/post/", description="Pydantic пример")
+async def create_item(item: ItemSchema):
+    return [item, item.name]

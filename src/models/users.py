@@ -10,6 +10,13 @@ CREATE TABLE users (
     age INT(11) NOT NULL,
     PRIMARY KEY (id)
 );
+
+# SQLite
+CREATE TABLE users (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT,
+	age INTEGER
+);
 """
 
 

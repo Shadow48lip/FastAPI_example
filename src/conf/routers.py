@@ -1,5 +1,8 @@
-from src.routes import router as router_1
-from src.routes_pydantic import router as router_2
+""" Склеиваем все роутеры """
+
+from src.api.examples import router as router_1
+from src.api.users import router as router_2
+
 
 router_list = [
     router_1,
